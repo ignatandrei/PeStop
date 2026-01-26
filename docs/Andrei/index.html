@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeStop - Pachete de Igienă Menstruală</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>🩸 PeStop</h1>
+            <p>Inițiativa de distribuție a pachetelor de igienă menstruală</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Impactul nostru în numere</h2>
+            <p>Descoperă cum schimbăm vieți prin acces la igienă și educație</p>
+        </section>
+
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-icon">📦</div>
+                <div class="metric-content">
+                    <h3>Pachete Distribuite</h3>
+                    <p class="metric-number" data-value="8547">0</p>
+                    <p class="metric-unit">pachete de igienă menstruală</p>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon">⏱️</div>
+                <div class="metric-content">
+                    <h3>Ore Finanțate</h3>
+                    <p class="metric-number" data-value="3214">0</p>
+                    <p class="metric-unit">ore de voluntariat și educație</p>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon">📚</div>
+                <div class="metric-content">
+                    <h3>Cursuri Desfășurate</h3>
+                    <p class="metric-number" data-value="156">0</p>
+                    <p class="metric-unit">sesiuni de educație și conștientizare</p>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon">👥</div>
+                <div class="metric-content">
+                    <h3>Beneficiari</h3>
+                    <p class="metric-number" data-value="12453">0</p>
+                    <p class="metric-unit">persoane ajutate direct</p>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon">🤝</div>
+                <div class="metric-content">
+                    <h3>Voluntari Implicați</h3>
+                    <p class="metric-number" data-value="487">0</p>
+                    <p class="metric-unit">voluntari dedicate misiunii</p>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon">🌍</div>
+                <div class="metric-content">
+                    <h3>Comunități Impactate</h3>
+                    <p class="metric-number" data-value="89">0</p>
+                    <p class="metric-unit">comunități în țară</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="charts-section">
+            <div class="chart-container">
+                <h3>Distribuție pe Regiuni</h3>
+                <canvas id="distributionChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h3>Progresul Lunar al Pachetelor</h3>
+                <canvas id="progressChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h3>Tipuri de Activități</h3>
+                <canvas id="activitiesChart"></canvas>
+            </div>
+        </section>
+
+        <section class="impact-stories">
+            <h2>Povești de Impact</h2>
+            <div class="stories-grid">
+                <div class="story-card">
+                    <div class="story-icon">✨</div>
+                    <h4>Accesibilitate</h4>
+                    <p>Am asigurat accesul la produse de igienă menstruală pentru peste 12,000 de fetițe și femei din comunități vulnerabile.</p>
+                </div>
+                <div class="story-card">
+                    <div class="story-icon">📖</div>
+                    <h4>Educație</h4>
+                    <p>Prin 156 de cursuri desfășurate, am creat conștientizare despre salute, igienă și demnitate menstruală.</p>
+                </div>
+                <div class="story-card">
+                    <div class="story-icon">💪</div>
+                    <h4>Empowerment</h4>
+                    <p>487 de voluntari pasionați au lucrat 3,214 ore pentru a crea schimbări pozitive în 89 de comunități.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 PeStop - Inițiativă pentru Egalitate și Demnitate</p>
+        <p>Transformând vieți, o pachet la o dată</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
