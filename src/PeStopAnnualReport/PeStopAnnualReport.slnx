@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="PSAR/PSAR.csproj" />
+  <Project Path="PSARModels/PSARModels.csproj" />
+  <Project Path="PSARReadData/PSARReadData.csproj" />
+  <Project Path="PSARTests/PSARTests.csproj" />
+</Solution>
