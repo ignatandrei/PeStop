@@ -3,6 +3,7 @@ using OneOf;
 using OneOf.Types;
 using PSARModels;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 namespace PSARReadData;
 
@@ -26,7 +27,7 @@ public class ReadExcel
         var packages = res.AsT0;
         return new Result<bool>(true);
     }
-    public async Task<ResultPachete> ReadPachete(string excel,string nameSheet)
+    public async Task<ResultPackages> ReadPachete(string excel,string nameSheet)
     {
         var columns = MiniExcel.GetColumns(excel,sheetName:nameSheet,useHeaderRow:true);
         var missing =colsPachete.Where(it=> !columns.Contains(it)).ToArray();
@@ -35,21 +36,28 @@ public class ReadExcel
             return new NotFoundHeader(missing);
         }
         var pachete = MiniExcel.Query(path: excel, useHeaderRow: true, sheetName: nameSheet).Cast<IDictionary<string, object>>();
-        List<Packages> packages = [];
-        foreach(var row in pachete)
+        PackagesList packages = new();
+        foreach(var (number,row) in pachete.Index())
         {
-            var x = row as IDictionary<string,object>;
+            IDictionary<string, object> x = row as IDictionary<string,object>;
             ArgumentNullException.ThrowIfNull(x);
-            Packages p = new();            
+            PackagesRead p = new(number+2);//first is header     
+            p.Year = x["an"]?.ToString()??"";
+            p.Month = x["month"].ToString() ?? "";
+            for(int i = 2; i < colsPachete.Length; i++)
+            {
+                string col = colsPachete[i];
+                p.Values.Add(col,x[col]?.ToString()??"");
+            }
             packages.Add(p);
         }
-        return new Result<Packages[]>([.. packages]);
+        return new Result<PackagesList>(packages);
     }
 }
 
 [GenerateOneOf]
-public partial class ResultPachete : OneOfBase<
-    Result<Packages[]>,
+public partial class ResultPackages : OneOfBase<
+    Result<PackagesList>,
     NotFoundHeader,
     ProblemWithRow
     >
@@ -64,7 +72,7 @@ public partial class ResultExcel : OneOfBase<
     Result<bool>,
     MissingExcel,
     ExcelMissingSheet,
-    ResultPachete> { 
+    ResultPackages> { 
 
 }
 

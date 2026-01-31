@@ -1,9 +1,23 @@
 ﻿namespace PSARModels;
 
-public class Packages
+public class PackagesRead
 {
-    public int Year { get; set; }
-    public int Month { get; set; }
+    public readonly int row;
+
+    public PackagesRead(int row)
+    {
+        this.row = row;
+        Year = "";
+        Month = "";
+        Values = [];
+    }
+    public StringOrNumber Year { get; set; }
+    public StringOrNumber Month { get; set; }
     
-    public ValuesPerLocalityInt Values { get; set; }
+    public ValuesPerLocalityRead Values { get; set; }
+}
+
+public class PackagesList : List<PackagesRead>
+{
+
 }
