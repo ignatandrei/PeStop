@@ -46,11 +46,12 @@ partial class TestLoadExcel : FeatureFixture
         var res = result.Value as DataObtained;
         await Assert.That(res).IsNotNull();
         var valid = res.Validate(new ValidationContext(this)).ToArray();
-        await Assert.That(valid).HasCount(nr);
-        foreach (var (index,item) in valid.Index())
+        foreach (var (index, item) in valid.Index())
         {
-            StepExecution.Current.Comment($"{index+1})  {item.ErrorMessage} {item.MemberNames.FirstOrDefault()}");
+            StepExecution.Current.Comment($"{index + 1})  {item.ErrorMessage} {item.MemberNames.FirstOrDefault()}");
         }
+
+        await Assert.That(valid).HasCount(nr); 
     }
     async Task When_Read_The_Excel(string excel)
     {

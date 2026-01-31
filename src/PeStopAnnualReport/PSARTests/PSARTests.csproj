@@ -28,7 +28,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Data\" />
-	</ItemGroup>
+	</ItemGroup> 
 
 	<ItemGroup>
 	  <None Update="Data\error_sheet_names.xlsx">

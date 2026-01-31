@@ -34,10 +34,11 @@ public partial class TestLoadExcel
     [Label("SCENARIO-2-LoadData-validations")]
     [Scenario]
     [Arguments("Data/invalid_package_year_sheet.xlsx", typeof(DataObtained),7)]
+    [Arguments("Data/centralizare_pe_stop.xlsx", typeof(DataObtained), 0)]
     public async Task BasicVerifyValidation(string excel, Type type,int nrValidations)
     {
 
-        await Runner.RunScenarioAsync(
+        await Runner.RunScenarioAsync( 
             _ => Given_The_Excel(excel),
             _ => When_Read_The_Excel(excel),
             _ => Then_Should_Obtain_Type(type),
