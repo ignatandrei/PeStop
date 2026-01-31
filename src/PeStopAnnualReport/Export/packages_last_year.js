@@ -1,10 +1,3 @@
-@using PSAR.Export
-@using System.Globalization
-@inherits RazorBlade.PlainTextTemplate<DisplayData>;
-@{
-    var months =CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
-    //var legent = Model.packages.First().Values.Select(it => it.Key).ToArray();
-}
 
 //this is the script
 function DisplayPackagesStackLine(idDiv) 
@@ -13,13 +6,13 @@ function DisplayPackagesStackLine(idDiv)
 
 option = {
   title: {
-    text: 'Packages @Model.year'
+    text: 'Packages 2025'
   },
   tooltip: {
     trigger: 'axis'
   },
   legend: {
-    data: [@string.Join(",", Model.colNames.Select(it=>$"'{it}'"))]
+    data: ['nr_pac_buc','nr_pac_tulcea','nr_pac_vaslui']
   },
   grid: {
     left: '3%',
@@ -42,19 +35,31 @@ option = {
   },
   series: [
 
-@foreach(var column in Model.colData)
-{
-    <text>
+
         {
-        name: '@column.Key',
+        name: 'nr_pac_buc',
         type: 'bar',
         stack: 'Total',
-        data: [@string.Join(",",column.Value.Select(it=>it.Value).ToArray())]
+        data: [574,550,0,0,602,551,607,0,0,0,0,0,0]
         },
 
-    </text>    
-}
+    
+        {
+        name: 'nr_pac_tulcea',
+        type: 'bar',
+        stack: 'Total',
+        data: [48,48,48,48,48,48,48,48,48,48,48,48,0]
+        },
 
+    
+        {
+        name: 'nr_pac_vaslui',
+        type: 'bar',
+        stack: 'Total',
+        data: [50,50,50,50,50,50,50,50,0,50,50,50,0]
+        },
+
+    
   ]
 };
 

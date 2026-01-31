@@ -7,4 +7,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PSAR.Export\PSAR.Export.csproj" />
+    <ProjectReference Include="..\PSARReadData\PSARReadData.csproj" />
+  </ItemGroup>
+	<ItemGroup>
+		<Watch Include="../PSAR.Export/Templates/*.cshtml" Exclude="obj\**\*;bin\**\*" />
+	</ItemGroup>
+
 </Project>

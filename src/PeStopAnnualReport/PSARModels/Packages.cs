@@ -1,12 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace PSARModels;
 
+public record Package(int year, int month, ValuesPerLocalityInt Values);
+[DebuggerDisplay("{HelpDisplay}")]
 public class PackageRead:IValidatableObject
 {
     private readonly int row;
 
+    private string HelpDisplay
+    {
+        get
+        {
+            return $"Row {row} {Year} {Month}   {Values}";
+        }
+    }
     public PackageRead(int row)
     {
         this.row = row;
@@ -72,6 +83,23 @@ public class PackagesList : List<PackageRead>, IValidatableObject
                 yield return vr;
             }
         }
+    }
+    public Package[] ValidPackages()
+    {
+        var vc=new ValidationContext(this);
+        var packagesValid = this.Where(it => !it.Validate(vc).Any()).ToArray();
+        return packagesValid.Select(it =>
+            {
+                try
+                {
+                    return new Package(it.Year.TryGetNumber().number, it.Month.TryGetMonth().number, it.Values.ValidData());
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        ).ToArray();
     }
 }
 
