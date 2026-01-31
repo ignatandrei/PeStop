@@ -12,6 +12,8 @@ public record DataObtained(PackagesList? packages) : IValidatableObject
 {
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
+        if(packages == null) yield break;
+        
         foreach(var item in packages.Validate(validationContext))
         {
             yield return item;

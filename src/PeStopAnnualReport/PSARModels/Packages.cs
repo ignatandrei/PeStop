@@ -15,12 +15,13 @@ public class PackageRead:IValidatableObject
         Values = [];
     }
     public StringShouldBeNumber Year { get; set; }
-    public StringShouldBeNumber Month { get; set; }
+    public StringShouldBeMonth Month { get; set; }
     
     public ValuesPerLocalityRead Values { get; set; }
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
+        string[] members = ["row :" + row];
         ValidationResult? validationResult;
 
         validationResult= null;
@@ -29,15 +30,16 @@ public class PackageRead:IValidatableObject
             val => validationResult = val,
             _ => { }
             );
-        if (validationResult != null) yield return validationResult;
-
-        StringShouldBeNumber.Validation(Month).Switch(
+        if (validationResult != null) yield return new ValidationResult(validationResult.ErrorMessage,members)  ;
+        validationResult = null;
+        StringShouldBeMonth.Validation(Month).Switch(
             val => validationResult = val,
             _ => { }
             );
-        if (validationResult != null) yield return validationResult;
+        if (validationResult != null) yield return new ValidationResult(validationResult.ErrorMessage,members)  ;
+        validationResult = null;
         var items=this.Values.Validate(new ValidationContext(this));
-        foreach (var item in items) yield return item;
+        foreach (var item in items) yield return new ValidationResult(item.ErrorMessage, members) ;
 
     }
 
@@ -45,8 +47,24 @@ public class PackageRead:IValidatableObject
 
 public class PackagesList : List<PackageRead>, IValidatableObject
 {
+    //if does not have month and year
+    private Predicate<PackageRead> Empty = (p) =>
+    {
+        if (p == null) return true;
+        if (p.Year == null) return true;
+        if (p.Month == null) return true;
+        var valYear = p.Year.Value?.ToString()?.Trim();
+        var valMonth = p.Month.Value?.ToString()?.Trim();
+        return valYear?.Length == 0 && valMonth?.Length == 0;
+    };
+    public void RemoveEmpty()
+    {
+        //var nrEmpty = this.Where(it=>Empty(it)).ToArray();
+        this.RemoveAll(Empty);
+    }
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
+        this.RemoveEmpty();
         foreach(var item in this)
         {
             foreach (var vr in item.Validate(validationContext))

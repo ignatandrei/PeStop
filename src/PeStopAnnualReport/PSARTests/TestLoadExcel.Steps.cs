@@ -3,6 +3,7 @@ using LightBDD.TUnit;
 using PSARReadData;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using TUnit.Core.Exceptions;
 
@@ -16,12 +17,12 @@ partial class TestLoadExcel : FeatureFixture
     {
         //await Assert.That(excel).Satisfies(File.Exists);
         await Assert.That(excel).IsNotEmpty();
-        var fullPath = Path.GetFullPath(excel);
-        var dir = Path.GetDirectoryName(fullPath)??"";
-        foreach (var item in Directory.GetFiles(dir,"*.xlsx"))
-        {
-            StepExecution.Current.Comment($"in the folder exists file : {item}");
-        }
+        //var fullPath = Path.GetFullPath(excel);
+        //var dir = Path.GetDirectoryName(fullPath)??"";
+        //foreach (var item in Directory.GetFiles(dir,"*.xlsx"))
+        //{
+        //    StepExecution.Current.Comment($"in the folder exists file : {item}");
+        //}
 
     }
     async Task Then_Should_Obtain_Type(Type type)
@@ -39,6 +40,17 @@ partial class TestLoadExcel : FeatureFixture
         typeRes = res.GetType();
         Assert.Equals(type, typeRes);
 
+    }
+    async Task And_Data_Obtained_Contains_Validation_nr(int nr)
+    {
+        var res = result.Value as DataObtained;
+        await Assert.That(res).IsNotNull();
+        var valid = res.Validate(new ValidationContext(this)).ToArray();
+        await Assert.That(valid).HasCount(nr);
+        foreach (var (index,item) in valid.Index())
+        {
+            StepExecution.Current.Comment($"{index+1})  {item.ErrorMessage} {item.MemberNames.FirstOrDefault()}");
+        }
     }
     async Task When_Read_The_Excel(string excel)
     {

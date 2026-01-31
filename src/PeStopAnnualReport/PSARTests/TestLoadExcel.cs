@@ -33,14 +33,15 @@ public partial class TestLoadExcel
     }
     [Label("SCENARIO-2-LoadData-validations")]
     [Scenario]
-    [Arguments("Data/invalid_package_year_sheet.xlsx", typeof(DataObtained))]
-    public async Task BasicVerifyValidation(string excel, Type type)
+    [Arguments("Data/invalid_package_year_sheet.xlsx", typeof(DataObtained),7)]
+    public async Task BasicVerifyValidation(string excel, Type type,int nrValidations)
     {
 
         await Runner.RunScenarioAsync(
             _ => Given_The_Excel(excel),
             _ => When_Read_The_Excel(excel),
-            _ => Then_Should_Obtain_Type(type)
+            _ => Then_Should_Obtain_Type(type),
+            _ => And_Data_Obtained_Contains_Validation_nr(nrValidations)
             );
     }
 
