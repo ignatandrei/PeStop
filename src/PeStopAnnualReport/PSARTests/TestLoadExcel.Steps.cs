@@ -1,8 +1,10 @@
-﻿using LightBDD.TUnit;
+﻿using LightBDD.Framework;
+using LightBDD.TUnit;
 using PSARReadData;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TUnit.Core.Exceptions;
 
 namespace PSARTests;
 
@@ -14,6 +16,13 @@ partial class TestLoadExcel : FeatureFixture
     {
         //await Assert.That(excel).Satisfies(File.Exists);
         await Assert.That(excel).IsNotEmpty();
+        var fullPath = Path.GetFullPath(excel);
+        var dir = Path.GetDirectoryName(fullPath)??"";
+        foreach (var item in Directory.GetFiles(dir,"*.xlsx"))
+        {
+            StepExecution.Current.Comment($"in the folder exists file : {item}");
+        }
+
     }
     async Task Then_Should_Obtain_Type(Type type)
     {
@@ -21,7 +30,7 @@ partial class TestLoadExcel : FeatureFixture
         var typeRes= res.GetType();
         if (typeof(ResultPackages) != typeRes)
         {
-            Assert.Equals(type, typeRes);
+            await Assert.That(type).IsEqualTo(typeRes);
             return;
         }
         ResultPackages? rp=res as ResultPackages;
@@ -34,6 +43,7 @@ partial class TestLoadExcel : FeatureFixture
     async Task When_Read_The_Excel(string excel)
     {
         result = await readExcel.ReadExcelData(excel);
+        StepExecution.Current.Comment($"the result type of reading excel is {result.Value?.GetType().ToString()}");
         //data.Switch(
         //    res => result = res.Value,
         //    missingExcel => throw new FileNotFoundException(nameof(missingExcel.fileName)),

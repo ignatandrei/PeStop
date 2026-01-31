@@ -35,7 +35,7 @@ public class ReadExcel
         if (!res.IsT0)
             return res;
         var packages = res.AsT0;
-        return new Result<DataObtained>(new DataObtained(packages));
+        return new DataObtained(packages);
     }
     public async Task<ResultPackages> ReadPachete(string excel,string nameSheet)
     {
@@ -78,7 +78,7 @@ public record NotFoundHeader(string[] name);
 
 [GenerateOneOf]
 public partial class ResultExcel : OneOfBase<
-    Result<DataObtained>,
+    DataObtained,
     MissingExcel,
     ExcelMissingSheet,
     ResultPackages> { 
