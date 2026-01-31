@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 namespace PSARReadData;
 
+public record DataObtained(PackagesList? packages);
 public class ReadExcel
 {
     static string[] sheets = ["pachete", "cursuri", "voluntari"];
@@ -14,8 +15,7 @@ public class ReadExcel
     public async Task<ResultExcel> ReadExcelData(string excel)
     {
         if (!File.Exists(excel))
-            return new MissingExcel(excel);
-
+            return new MissingExcel(excel);        
         var sheetsInExcel = MiniExcel.GetSheetNames(excel);
         var missing = sheets.Where(it => !sheetsInExcel.Contains(it)).ToArray();
         if (missing.Length > 0)
@@ -24,11 +24,12 @@ public class ReadExcel
         var res = await ReadPachete(excel, sheets[0]);
         if (!res.IsT0)
             return res;
-        var packages = res.AsT0;
-        return new Result<bool>(true);
+        var packages = res.AsT0.Value;
+        return new Result<DataObtained>(new DataObtained(packages));
     }
     public async Task<ResultPackages> ReadPachete(string excel,string nameSheet)
     {
+        
         var columns = MiniExcel.GetColumns(excel,sheetName:nameSheet,useHeaderRow:true);
         var missing =colsPachete.Where(it=> !columns.Contains(it)).ToArray();
         if(missing.Length > 0)
@@ -58,18 +59,16 @@ public class ReadExcel
 [GenerateOneOf]
 public partial class ResultPackages : OneOfBase<
     Result<PackagesList>,
-    NotFoundHeader,
-    ProblemWithRow
+    NotFoundHeader
     >
 {
 
 }
 public record NotFoundHeader(string[] name);
-public record ProblemWithRow(int nrRow,int nrCol);
 
 [GenerateOneOf]
 public partial class ResultExcel : OneOfBase<
-    Result<bool>,
+    Result<DataObtained>,
     MissingExcel,
     ExcelMissingSheet,
     ResultPackages> { 

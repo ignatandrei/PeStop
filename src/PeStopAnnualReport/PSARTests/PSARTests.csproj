@@ -30,6 +30,12 @@
 	  <Folder Include="Data\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="Data\error_sheet_names.xlsx">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 	<PropertyGroup>
 		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
 		<CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GX</CompilerGeneratedFilesOutputPath>
