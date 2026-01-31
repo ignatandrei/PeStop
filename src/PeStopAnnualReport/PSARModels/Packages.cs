@@ -3,11 +3,11 @@ using System.Runtime.CompilerServices;
 
 namespace PSARModels;
 
-public class PackagesRead:IValidatableObject
+public class PackageRead:IValidatableObject
 {
     private readonly int row;
 
-    public PackagesRead(int row)
+    public PackageRead(int row)
     {
         this.row = row;
         Year = "";
@@ -43,9 +43,18 @@ public class PackagesRead:IValidatableObject
 
 }
 
-public class PackagesList : List<PackagesRead>
+public class PackagesList : List<PackageRead>, IValidatableObject
 {
-
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        foreach(var item in this)
+        {
+            foreach (var vr in item.Validate(validationContext))
+            {
+                yield return vr;
+            }
+        }
+    }
 }
 
 public record ProblemRow(int row, string problem);

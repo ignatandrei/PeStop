@@ -2,12 +2,22 @@
 using OneOf;
 using OneOf.Types;
 using PSARModels;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 namespace PSARReadData;
 
-public record DataObtained(PackagesList? packages);
+public record DataObtained(PackagesList? packages) : IValidatableObject
+{
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        foreach(var item in packages.Validate(validationContext))
+        {
+            yield return item;
+        }
+    }
+};
 public class ReadExcel
 {
     static string[] sheets = ["pachete", "cursuri", "voluntari"];
@@ -24,7 +34,7 @@ public class ReadExcel
         var res = await ReadPachete(excel, sheets[0]);
         if (!res.IsT0)
             return res;
-        var packages = res.AsT0.Value;
+        var packages = res.AsT0;
         return new Result<DataObtained>(new DataObtained(packages));
     }
     public async Task<ResultPackages> ReadPachete(string excel,string nameSheet)
@@ -42,7 +52,7 @@ public class ReadExcel
         {
             IDictionary<string, object> x = row as IDictionary<string,object>;
             ArgumentNullException.ThrowIfNull(x);
-            PackagesRead p = new(number+2);//first is header     
+            PackageRead p = new(number+2);//first is header     
             p.Year = x[colsPachete[0]]?.ToString()??"";
             p.Month = x[colsPachete[1]]?.ToString() ?? "";
             for(int i = 2; i < colsPachete.Length; i++)
@@ -52,13 +62,13 @@ public class ReadExcel
             }
             packages.Add(p);
         }
-        return new Result<PackagesList>(packages);
+        return packages;
     }
 }
 
 [GenerateOneOf]
 public partial class ResultPackages : OneOfBase<
-    Result<PackagesList>,
+    PackagesList,
     NotFoundHeader
     >
 {
