@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Include="..\data\centralizare_pe_stop.xlsx" Link="centralizare_pe_stop.xlsx">
+	  <None Include="..\data\centralizare_pe_stop.xlsx" Link="Data\centralizare_pe_stop.xlsx">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
@@ -24,6 +24,10 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\PSARModels\PSARModels.csproj" />
 	  <ProjectReference Include="..\PSARReadData\PSARReadData.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Data\" />
 	</ItemGroup>
 
 	<PropertyGroup>

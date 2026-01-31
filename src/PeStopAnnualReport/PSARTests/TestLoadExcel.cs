@@ -16,7 +16,7 @@ public partial class TestLoadExcel
 {
     [Label("SCENARIO-1-LoadData")]
     [Scenario]
-    [Arguments("centralizare_pe_stop.xlsx")]
+    [Arguments("Data/centralizare_pe_stop.xlsx")]
     
     public async Task BasicVerifyThrow(string excel)
     {

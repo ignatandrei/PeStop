@@ -42,8 +42,8 @@ public class ReadExcel
             IDictionary<string, object> x = row as IDictionary<string,object>;
             ArgumentNullException.ThrowIfNull(x);
             PackagesRead p = new(number+2);//first is header     
-            p.Year = x["an"]?.ToString()??"";
-            p.Month = x["month"].ToString() ?? "";
+            p.Year = x[colsPachete[0]]?.ToString()??"";
+            p.Month = x[colsPachete[1]]?.ToString() ?? "";
             for(int i = 2; i < colsPachete.Length; i++)
             {
                 string col = colsPachete[i];

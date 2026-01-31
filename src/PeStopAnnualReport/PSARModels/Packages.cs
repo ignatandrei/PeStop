@@ -2,7 +2,7 @@
 
 public class PackagesRead
 {
-    public readonly int row;
+    private readonly int row;
 
     public PackagesRead(int row)
     {
@@ -21,3 +21,5 @@ public class PackagesList : List<PackagesRead>
 {
 
 }
+
+public record ProblemRow(int row, string problem);
