@@ -36,8 +36,13 @@ public class ValuesPerLocalityRead : ValuesPerLocality<StringShouldBeNumber>, IV
     }
     private ValidationResult? ValidateItem(KeyValuePair<string,StringShouldBeNumber> item)
     {
+        
         var name = item.Key;
         var value = item.Value;
+        if (value == null)
+        {
+            return new ValidationResult($"Value for {item.Key} is null.");
+        }
         ValidationResult? result = null;
         StringShouldBeNumber.Validation(value, name).Switch(
             val => result = val,

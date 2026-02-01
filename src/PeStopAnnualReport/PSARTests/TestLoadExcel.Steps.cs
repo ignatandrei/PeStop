@@ -36,9 +36,11 @@ partial class TestLoadExcel : FeatureFixture
         }
         ResultPackages? rp=res as ResultPackages;
         ArgumentNullException.ThrowIfNull(rp);
-        res = result.Value;
+        
+        res = rp.Value;
         typeRes = res.GetType();
-        Assert.Equals(type, typeRes);
+        //Assert.Equals(type, typeRes);
+        await Assert.That(type).IsEqualTo(typeRes);
 
     }
     async Task And_Data_Obtained_Contains_Validation_nr(int nr)
