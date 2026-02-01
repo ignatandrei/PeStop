@@ -1,5 +1,5 @@
 
-//this is the script
+//this is the script to display for 2025 packages 3
 function DisplayPackagesStackLine(idDiv) 
 {
     var myChart = echarts.init(document.getElementById(idDiv));
