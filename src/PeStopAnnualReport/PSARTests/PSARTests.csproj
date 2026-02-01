@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net10.0</TargetFramework>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\data\centralizare_pe_stop.xlsx" Link="Data\centralizare_pe_stop.xlsx">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="LightBDD.TUnit" Version="3.11.1" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.2" />
+		<PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" Version="10.2.0" />
+		<!--<PackageReference Include="TUnit" Version="1.12.43" />-->
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\PSARModels\PSARModels.csproj" />
+	  <ProjectReference Include="..\PSARReadData\PSARReadData.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Data\" />
+	</ItemGroup> 
+
+	<ItemGroup>
+	  <None Update="Data\error_sheet_names.xlsx">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Data\error_sheet__header_packages.xlsx">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Data\invalid_package_year_sheet.xlsx">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+	<PropertyGroup>
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+		<CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GX</CompilerGeneratedFilesOutputPath>
+	</PropertyGroup>
+</Project>

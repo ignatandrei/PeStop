@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="PSAR.Export/PSAR.Export.csproj" Id="36e7a3ce-26fc-4195-9004-9ab1b0959f6d" />
+  <Project Path="PSAR/PSAR.csproj" />
+  <Project Path="PSARModels/PSARModels.csproj" />
+  <Project Path="PSARReadData/PSARReadData.csproj" />
+  <Project Path="PSARTests/PSARTests.csproj" />
+</Solution>
