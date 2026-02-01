@@ -4,7 +4,7 @@ function DisplayPackagesStackLine(idDiv)
 {
     var myChart = echarts.init(document.getElementById(idDiv));
 
-option = {
+var option = {
   title: {
     text: 'Packages 2025'
   },
