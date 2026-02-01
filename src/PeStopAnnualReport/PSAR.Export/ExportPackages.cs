@@ -83,7 +83,21 @@ public class ExportPackages
                 attr = xml.CreateAttribute("fill");
                 node.Attributes.Append(attr);
             }
-            attr.Value = "red";
+            attr.Value = total switch 
+            {
+                > 2000 => "red",
+                > 1000 => "#E31A1C",
+                //> 500 => "green",
+                //> 200 => "#E31A1C",
+                //> 100 => "#FC4E2A",
+                //> 50 => "#FD8D3C",
+                //> 20 => "#FEB24C",
+                //> 10 => "#FED976",
+                _ => "green"
+            };
+
+
+            //            attr.Value = "red";
         }
         return xml;
     }
