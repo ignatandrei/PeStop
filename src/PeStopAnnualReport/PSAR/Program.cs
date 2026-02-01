@@ -12,6 +12,8 @@ ExportPackages export= new ExportPackages();
 
 var res= await export.ExportLineStackLastYear(obtain.packages);
 ArgumentNullException.ThrowIfNull(res);
-string pathExport = @"D:\eu\GitHub\PeStop\src\PeStopAnnualReport\Export";
-var filePath = Path.Combine(pathExport, "packages_last_year.js");
+string folderExport = @"D:\eu\GitHub\PeStop\docs\export";
+
+await ExportPackages.SaveFiles(folderExport);
+var filePath = Path.Combine(folderExport, "packages_last_year.js");    
 await File.WriteAllBytesAsync(filePath, res);

@@ -13,6 +13,7 @@
   </ItemGroup>
 	<ItemGroup>
 		<Watch Include="../PSAR.Export/Templates/*.cshtml" Exclude="obj\**\*;bin\**\*" />
+		<Watch Include="../PSAR.Export/resources/*.*" Exclude="obj\**\*;bin\**\*" />
 	</ItemGroup>
 
 </Project>

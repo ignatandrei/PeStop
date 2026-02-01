@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Pe Stop</title>
+    <!-- Include the ECharts file you just downloaded -->
+    <script src="echarts.min.js"></script>
+    <script src="packages_last_year.js"></script>
+  </head>
+  <body>
+  <h1>Pe stop data graphics</h1>
+    <div id="packages_last_year_stack_line" style="width: 600px;height:400px;"></div>
+    <object id="MapRO" type="image/svg+xml" data="ROPackages.svg"></object>
+      <div id="tooltipMapRO" />
+    <script type="text/javascript">
+DisplayPackagesStackLine('packages_last_year_stack_line')
+</script>
+  </body>
+</html>

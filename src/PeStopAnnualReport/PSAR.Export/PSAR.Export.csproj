@@ -13,7 +13,14 @@
 		<PackageReference Include="RazorBlade" Version="0.11.0" PrivateAssets="all" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Templates\" />
+		<EmbeddedResource  Include="resources/*.*" />
+		<Folder Include="Templates/" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Chorn.EmbeddedResourceAccessGenerator" Version="1.1.5" OutputItemType="Analyzer"  >
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 	<PropertyGroup>
 		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
