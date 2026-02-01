@@ -116,6 +116,7 @@ public class ExportPackages
         if (packages == null) return false;
         var validProblems = packages.Validate(new ValidationContext(this)).ToArray();
         var data = packages.ValidPackages();
+        if(data.Length ==0) return false;
         var maxYear = data.Max(it => it.year);
         data=data.Where(it=>it.year == maxYear).ToArray();
         if (data.Length == 0) return false;
