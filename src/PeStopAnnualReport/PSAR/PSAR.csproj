@@ -15,5 +15,8 @@
 		<Watch Include="../PSAR.Export/Templates/*.cshtml" Exclude="obj\**\*;bin\**\*" />
 		<Watch Include="../PSAR.Export/resources/*.*" Exclude="obj\**\*;bin\**\*" />
 	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="System.CommandLine" Version="2.0.2" />
+	</ItemGroup>
 
 </Project>
