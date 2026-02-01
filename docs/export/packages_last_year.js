@@ -40,7 +40,7 @@ var option = {
         name: 'nr_pac_buc',
         type: 'bar',
         stack: 'Total',
-        data: [574,550,0,0,602,551,607,0,0,0,0,0,0]
+        data: [574,550,0,0,602,551,607,0,0,0,0,0]
         },
 
     
@@ -48,7 +48,7 @@ var option = {
         name: 'nr_pac_tulcea',
         type: 'bar',
         stack: 'Total',
-        data: [48,48,48,48,48,48,48,48,48,48,48,48,0]
+        data: [48,48,48,48,48,48,48,48,48,48,48,48]
         },
 
     
@@ -56,7 +56,7 @@ var option = {
         name: 'nr_pac_vaslui',
         type: 'bar',
         stack: 'Total',
-        data: [50,50,50,50,50,50,50,50,0,50,50,50,0]
+        data: [50,50,50,50,50,50,50,50,0,50,50,50]
         },
 
     
