@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Xml;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -150,6 +151,10 @@ public class ExportPackages
         var bytes= Encoding.ASCII.GetBytes(text);
         filePath = Path.Combine(folderExport, "packages_last_year.js");
         await File.WriteAllBytesAsync(filePath, bytes);
+
+        var jsonFile = Path.Combine(folderExport, "pachete.json");
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        await File.WriteAllTextAsync(jsonFile, JsonSerializer.Serialize(data,options));
         return true;
     }
 
