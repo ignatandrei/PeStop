@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8" />
     <title>Pe Stop</title>
     <!-- Include the ECharts file you just downloaded -->
     <script src="echarts.min.js"></script>
     <script src="packages_last_year.js"></script>
-  </head>
-  <body>
-  <h1>Pe stop data graphics</h1>
+    <script src="voluntari_dataset_series_layout_by.js"></script>
+    
+</head>
+<body>
+    <h1>Pe stop data graphics</h1>
     <div id="packages_last_year_stack_line" style="width: 600px;height:400px;"></div>
+    <div id="voluntari_dataset_series_layout_by" style="width: 600px;height:400px;"></div>
+
     <object id="MapRO" type="image/svg+xml" data="packages_map_ro.svg"></object>
-      <div id="tooltipMapRO"></div>
+    <div id="tooltipMapRO"></div>
     <script type="text/javascript">
-DisplayPackagesStackLine('packages_last_year_stack_line')
-</script>
-  </body>
+        DisplayPackagesStackLine('packages_last_year_stack_line');
+        DisplayVoluntari('voluntari_dataset_series_layout_by');
+    </script>
+</body>
 </html>

@@ -1,7 +1,7 @@
 ﻿using LightBDD.Framework;
 using LightBDD.TUnit;
+using PSARModels;
 using PSARReadData;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -31,7 +31,7 @@ partial class TestLoadExcel : FeatureFixture
         var typeRes= res.GetType();
         if (typeof(ResultPackages) != typeRes)
         {
-            await Assert.That(type).IsEqualTo(typeRes);
+            await Assert.That(typeRes).IsEqualTo(type);
             return;
         }
         ResultPackages? rp=res as ResultPackages;
@@ -39,8 +39,9 @@ partial class TestLoadExcel : FeatureFixture
         
         res = rp.Value;
         typeRes = res.GetType();
-        //Assert.Equals(type, typeRes);
-        await Assert.That(type).IsEqualTo(typeRes);
+        var debug = ((dynamic)res).ToDebugString;
+        //StepExecution.Current.Comment($"the obtained type is {typeRes} {debug}");
+        await Assert.That(typeRes).IsEqualTo(type);
 
     }
     async Task And_Data_Obtained_Contains_Validation_nr(int nr)
@@ -54,6 +55,19 @@ partial class TestLoadExcel : FeatureFixture
         }
 
         await Assert.That(valid).HasCount(nr); 
+    }
+    async Task And_Data_Obtained_Contains_Voluntari(int Voluntari)
+    {
+        var res = result.Value as DataObtained;
+        await Assert.That(res).IsNotNull();
+        await Assert.That(res.voluntari?.ValidVoluntaris().Length).IsEqualTo(Voluntari);
+    }
+
+    async Task And_Data_Obtained_Contains_Packages(int Packages)
+    {
+        var res = result.Value as DataObtained;
+        await Assert.That(res).IsNotNull();
+        await Assert.That(res.packages?.ValidPackages()?.Length).IsEqualTo(Packages);
     }
     async Task When_Read_The_Excel(string excel)
     {

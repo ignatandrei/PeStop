@@ -1,6 +1,7 @@
 @using PSAR.Export
 @using System.Globalization
-@inherits RazorBlade.PlainTextTemplate<DisplayData>;
+
+@inherits RazorBlade.PlainTextTemplate<DisplayDataPackages>;
 @{
     var months =CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
     //var legent = Model.packages.First().Values.Select(it => it.Key).ToArray();

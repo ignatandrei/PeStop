@@ -11,22 +11,11 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PSAR.Export;
 
-public record DisplayData(ValidationResult[] problems,string[] colNames, Dictionary<string, Dictionary<int,int> > colData, int year);
+public record DisplayDataPackages(ValidationResult[] problems,string[] colNames, Dictionary<string, Dictionary<int,int> > colData, int year);
 public class ExportPackages
 {
-    public static async Task SaveFiles(string path) {
-        
-        await SaveEmb(EmbeddedResourceresources.echarts_min_js, path);
-        await SaveEmb(EmbeddedResourceresources.index_html, path);
-        await SaveEmb(EmbeddedResourceresources.RO_svg, path);
-    }
-    private static async Task SaveEmb(EmbeddedResourceresources res, string path)
-    {
-        var stream = EmbeddedResources.GetStream(res);
-        string fileName = res.ToString().Replace("_",".");
-        using var fileStream = File.Create(Path.Combine(path, fileName));
-        await stream.CopyToAsync(fileStream);
-    }
+    
+    
     private async Task<XmlDocument?> ExportMapRoPackages(Package[]? packages)
     {
         var map = EmbeddedResources.GetReader(EmbeddedResourceresources.RO_svg);
@@ -41,7 +30,7 @@ public class ExportPackages
         }
         Dictionary<string, string> translate = new()
         {
-            { "Bucharest","nr_pac_buc"},
+            { "Bucharest","nr_pac_bucuresti"},
             
                 { "Tulcea","nr_pac_tulcea"},
                 { "Vaslui","nr_pac_vaslui"}
@@ -146,7 +135,7 @@ public class ExportPackages
             colNames.Add(item.Key);
         }
          
-        var template= new PackagesLineStack(new DisplayData(validProblems,colNames.ToArray(), colData,maxYear));
+        var template= new PackagesLineStack(new DisplayDataPackages(validProblems,colNames.ToArray(), colData,maxYear));
         var text = await template.RenderAsync();
         var bytes= Encoding.ASCII.GetBytes(text);
         filePath = Path.Combine(folderExport, "packages_last_year.js");

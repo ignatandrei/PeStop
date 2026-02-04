@@ -1,6 +1,5 @@
 ﻿using LightBDD.Framework;
 using LightBDD.Framework.Scenarios;
-using PSARModels;
 using PSARReadData;
 using System;
 using System.Collections.Generic;
@@ -45,5 +44,21 @@ public partial class TestLoadExcel
             _ => And_Data_Obtained_Contains_Validation_nr(nrValidations)
             );
     }
+    [Label("SCENARIO-3-LoadData-success")]
+    [Scenario]
+    [Arguments("Data/centralizare_pe_stop.xlsx", typeof(DataObtained), 12,3)]
+    public async Task BasicVerifyAll(string excel, Type type, int nrPackages,int nrVoluntari)
+    {
 
+        await Runner.RunScenarioAsync(
+            _ => Given_The_Excel(excel),
+            _ => When_Read_The_Excel(excel),
+            _ => Then_Should_Obtain_Type(type),
+            _ => And_Data_Obtained_Contains_Packages(nrPackages),
+            _ => And_Data_Obtained_Contains_Voluntari(nrVoluntari)
+
+            );
+    }
+
+    
 }

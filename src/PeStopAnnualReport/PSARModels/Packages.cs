@@ -6,12 +6,12 @@ using System.Runtime.CompilerServices;
 namespace PSARModels;
 
 public record Package(int year, int month, ValuesPerLocalityInt Values);
-[DebuggerDisplay("{HelpDisplay}")]
+[DebuggerDisplay("{ToDebugString}")]
 public class PackageRead:IValidatableObject
 {
     private readonly int row;
 
-    private string HelpDisplay
+    private string ToDebugString
     {
         get
         {
@@ -86,6 +86,7 @@ public class PackagesList : List<PackageRead>, IValidatableObject
     }
     public Package[] ValidPackages()
     {
+        this.RemoveEmpty();
         var vc=new ValidationContext(this);
         var packagesValid = this.Where(it => !it.Validate(vc).Any()).ToArray();
         return packagesValid.Select(it =>
