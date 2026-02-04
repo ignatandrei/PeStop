@@ -8,7 +8,7 @@ namespace PSARModels;
 public record Voluntari(int year, ValuesPerLocalityInt Values);
 
 
-[DebuggerDisplay("{HelpDisplay}")]
+[DebuggerDisplay("{ToDebugString}")]
 public class VoluntarRead : IValidatableObject
 {
     private readonly int row;

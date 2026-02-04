@@ -60,7 +60,7 @@ partial class TestLoadExcel : FeatureFixture
     {
         var res = result.Value as DataObtained;
         await Assert.That(res).IsNotNull();
-        await Assert.That(res.voluntari?.Count).IsEqualTo(Voluntari);
+        await Assert.That(res.voluntari?.ValidVoluntaris().Length).IsEqualTo(Voluntari);
     }
 
     async Task And_Data_Obtained_Contains_Packages(int Packages)
