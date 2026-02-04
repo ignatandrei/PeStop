@@ -15,11 +15,11 @@ string folderExport = Path.Combine(rootProject, @"docs\export");
 
 var exportPackages = new ExportPackages();
 
-var res = await exportPackages.ExportLineStackLastYear(obtain.packages,folderExport);
+var res = await exportPackages.ExportAllDataPackages(obtain.packages,folderExport);
 Console.WriteLine($"Exported file: {res}");
 
 var exportVol = new ExportVoluntari();
-res = await exportVol.ExportChartVoluntari(obtain.voluntari, folderExport);
+res = await exportVol.ExportAllDataVoluntari(obtain.voluntari, folderExport);
 Console.WriteLine($"Exported file: {res}");
 await ExportHTML.SaveFiles(folderExport);
 

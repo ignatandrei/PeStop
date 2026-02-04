@@ -1,0 +1,26 @@
+[
+  {
+    "year": 2025,
+    "Values": {
+      "voluntari_bucuresti": 25,
+      "voluntari_tulcea": 2,
+      "voluntari_vaslui": 2
+    }
+  },
+  {
+    "year": 2024,
+    "Values": {
+      "voluntari_bucuresti": 20,
+      "voluntari_tulcea": 2,
+      "voluntari_vaslui": 0
+    }
+  },
+  {
+    "year": 2023,
+    "Values": {
+      "voluntari_bucuresti": 18,
+      "voluntari_tulcea": 0,
+      "voluntari_vaslui": 0
+    }
+  }
+]

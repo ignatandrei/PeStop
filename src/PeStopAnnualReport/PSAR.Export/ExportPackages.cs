@@ -115,7 +115,7 @@ public class ExportPackages
         }
         return colData;
     }
-    public async Task<bool> ExportLineStackLastYear(PackagesList? packages, string folderExport)
+    public async Task<bool> ExportAllDataPackages(PackagesList? packages, string folderExport)
     {
         if (packages == null) return false;
         var validProblems = packages.Validate(new ValidationContext(this)).ToArray();

@@ -3,7 +3,7 @@
     "year": 2025,
     "month": 1,
     "Values": {
-      "nr_pac_buc": 574,
+      "nr_pac_bucuresti": 574,
       "nr_pac_tulcea": 48,
       "nr_pac_vaslui": 50
     }
@@ -12,7 +12,7 @@
     "year": 2025,
     "month": 2,
     "Values": {
-      "nr_pac_buc": 550,
+      "nr_pac_bucuresti": 550,
       "nr_pac_tulcea": 48,
       "nr_pac_vaslui": 50
     }
@@ -21,7 +21,7 @@
     "year": 2025,
     "month": 3,
     "Values": {
-      "nr_pac_buc": 0,
+      "nr_pac_bucuresti": 0,
       "nr_pac_tulcea": 48,
       "nr_pac_vaslui": 50
     }
@@ -30,7 +30,7 @@
     "year": 2025,
     "month": 4,
     "Values": {
-      "nr_pac_buc": 0,
+      "nr_pac_bucuresti": 0,
       "nr_pac_tulcea": 48,
       "nr_pac_vaslui": 50
     }
@@ -39,7 +39,7 @@
     "year": 2025,
     "month": 5,
     "Values": {
-      "nr_pac_buc": 602,
+      "nr_pac_bucuresti": 602,
       "nr_pac_tulcea": 48,
       "nr_pac_vaslui": 50
     }
@@ -48,7 +48,7 @@
     "year": 2025,
     "month": 6,
     "Values": {
-      "nr_pac_buc": 551,
+      "nr_pac_bucuresti": 551,
       "nr_pac_tulcea": 48,
       "nr_pac_vaslui": 50
     }
@@ -57,7 +57,7 @@
     "year": 2025,
     "month": 7,
     "Values": {
-      "nr_pac_buc": 607,
+      "nr_pac_bucuresti": 607,
       "nr_pac_tulcea": 48,
       "nr_pac_vaslui": 50
     }
@@ -66,7 +66,7 @@
     "year": 2025,
     "month": 8,
     "Values": {
-      "nr_pac_buc": 0,
+      "nr_pac_bucuresti": 0,
       "nr_pac_tulcea": 48,
       "nr_pac_vaslui": 50
     }
@@ -75,16 +75,16 @@
     "year": 2025,
     "month": 9,
     "Values": {
-      "nr_pac_buc": 0,
+      "nr_pac_bucuresti": 0,
       "nr_pac_tulcea": 48,
-      "nr_pac_vaslui": 0
+      "nr_pac_vaslui": 50
     }
   },
   {
     "year": 2025,
     "month": 10,
     "Values": {
-      "nr_pac_buc": 0,
+      "nr_pac_bucuresti": 0,
       "nr_pac_tulcea": 48,
       "nr_pac_vaslui": 50
     }
@@ -93,7 +93,7 @@
     "year": 2025,
     "month": 11,
     "Values": {
-      "nr_pac_buc": 0,
+      "nr_pac_bucuresti": 0,
       "nr_pac_tulcea": 48,
       "nr_pac_vaslui": 50
     }
@@ -102,7 +102,7 @@
     "year": 2025,
     "month": 12,
     "Values": {
-      "nr_pac_buc": 0,
+      "nr_pac_bucuresti": 0,
       "nr_pac_tulcea": 48,
       "nr_pac_vaslui": 50
     }

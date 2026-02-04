@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Text.Json;
 
 namespace PSAR.Export;
 
@@ -11,7 +12,7 @@ record DataDisplayVoluntari(string[] colNames, Voluntari[] voluntari);
 
 public class ExportVoluntari
 {
-    public async Task<bool> ExportChartVoluntari(VoluntariList? voluntari, string folderExport)
+    public async Task<bool> ExportAllDataVoluntari(VoluntariList? voluntari, string folderExport)
     {
         if (voluntari == null) return false;
         var validProblems = voluntari.Validate(new ValidationContext(this)).ToArray();
@@ -24,6 +25,11 @@ public class ExportVoluntari
         var bytes = Encoding.ASCII.GetBytes(text);
         var filePath = Path.Combine(folderExport, "voluntari_dataset_series_layout_by.js");
         await File.WriteAllBytesAsync(filePath, bytes);
+
+        var jsonFile = Path.Combine(folderExport, "voluntari.json");
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        await File.WriteAllTextAsync(jsonFile, JsonSerializer.Serialize(data, options));
+        
         return true; 
 
 
