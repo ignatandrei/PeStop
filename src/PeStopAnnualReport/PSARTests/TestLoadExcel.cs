@@ -1,6 +1,5 @@
 ﻿using LightBDD.Framework;
 using LightBDD.Framework.Scenarios;
-using PSARModels;
 using PSARReadData;
 using System;
 using System.Collections.Generic;

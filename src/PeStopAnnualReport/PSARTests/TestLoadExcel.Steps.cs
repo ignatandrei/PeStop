@@ -1,7 +1,6 @@
 ﻿using LightBDD.Framework;
 using LightBDD.TUnit;
 using PSARReadData;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -31,7 +30,7 @@ partial class TestLoadExcel : FeatureFixture
         var typeRes= res.GetType();
         if (typeof(ResultPackages) != typeRes)
         {
-            await Assert.That(type).IsEqualTo(typeRes);
+            await Assert.That(typeRes).IsEqualTo(type);
             return;
         }
         ResultPackages? rp=res as ResultPackages;
@@ -39,8 +38,9 @@ partial class TestLoadExcel : FeatureFixture
         
         res = rp.Value;
         typeRes = res.GetType();
-        //Assert.Equals(type, typeRes);
-        await Assert.That(type).IsEqualTo(typeRes);
+        var debug = ((dynamic)res).ToDebugString;
+        //StepExecution.Current.Comment($"the obtained type is {typeRes} {debug}");
+        await Assert.That(typeRes).IsEqualTo(type);
 
     }
     async Task And_Data_Obtained_Contains_Validation_nr(int nr)

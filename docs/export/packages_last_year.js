@@ -1,4 +1,5 @@
 
+
 //this is the script to display for 2025 packages 3
 function DisplayPackagesStackLine(idDiv) 
 {
@@ -12,7 +13,7 @@ var option = {
     trigger: 'axis'
   },
   legend: {
-    data: ['nr_pac_buc','nr_pac_tulcea','nr_pac_vaslui']
+    data: ['nr_pac_bucuresti','nr_pac_tulcea','nr_pac_vaslui']
   },
   grid: {
     left: '3%',
@@ -37,7 +38,7 @@ var option = {
 
 
         {
-        name: 'nr_pac_buc',
+        name: 'nr_pac_bucuresti',
         type: 'bar',
         stack: 'Total',
         data: [574,550,0,0,602,551,607,0,0,0,0,0]
@@ -56,7 +57,7 @@ var option = {
         name: 'nr_pac_vaslui',
         type: 'bar',
         stack: 'Total',
-        data: [50,50,50,50,50,50,50,50,0,50,50,50]
+        data: [50,50,50,50,50,50,50,50,50,50,50,50]
         },
 
     

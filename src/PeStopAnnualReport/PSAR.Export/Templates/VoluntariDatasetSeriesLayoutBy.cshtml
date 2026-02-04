@@ -1,0 +1,61 @@
+@using PSAR.Export
+@using System.Globalization
+@inherits RazorBlade.PlainTextTemplate<DataDisplayVoluntari>;
+@{
+    string colNames = string.Join(", ",Model.colNames.Select(it=>$"'{it}'"));
+
+}
+
+//this is the script to display for voluntari with number cols 
+function DisplayVoluntari(idDiv) 
+{
+    var myChart = echarts.init(document.getElementById(idDiv));
+
+var option = {
+  title: {
+    text: 'Voluntari'
+  },
+  
+  legend: {
+    'show':true,
+    'top':'top'
+  },
+  tooltip: {},
+  dataset: {
+    source: [
+      ['voluntari', @colNames ],
+      @foreach(var item in Model.voluntari)
+      {
+    <text>
+        ['@item.year', @string.Join(", ", item.Values.Select(it => it.Value))],
+
+    </text>
+      }
+
+    ]
+  },
+  xAxis: [
+    { type: 'category', gridIndex: 0 },
+    { type: 'category', gridIndex: 1 }
+  ],
+  yAxis: [{ gridIndex: 0 }, { gridIndex: 1 }],
+  grid: [{ bottom: '55%' }, { top: '55%' }],
+  series: [
+    // These series are in the first grid.
+    @for(int iRow= 0;iRow<Model.voluntari.Length;iRow++){
+        <text>
+            { type: 'bar', seriesLayoutBy: 'row' },
+        </text>
+    }
+    // These series are in the second grid.
+    @for(int iCol=0; iCol < (Model.colNames?.Length??0); iCol++)
+    {
+        <text>
+            { type: 'bar', xAxisIndex: 1, yAxisIndex: 1 },
+        </text>
+    }
+  ]
+};
+      myChart.setOption(option);
+
+}

@@ -10,11 +10,16 @@ ReadExcel readExcel = new();
 var result = await readExcel.ReadExcelData(fileName);
 var obtain = result.AsT0;
 
-var export= new ExportPackages();
-string folderExport = Path.Combine(rootProject ,@"docs\export");
 
-var res = await export.ExportLineStackLastYear(obtain.packages,folderExport);
+string folderExport = Path.Combine(rootProject, @"docs\export");
+
+var exportPackages = new ExportPackages();
+
+var res = await exportPackages.ExportLineStackLastYear(obtain.packages,folderExport);
 Console.WriteLine($"Exported file: {res}");
 
-await ExportPackages.SaveFiles(folderExport);
+var exportVol = new ExportVoluntari();
+res = await exportVol.ExportChartVoluntari(obtain.voluntari, folderExport);
+Console.WriteLine($"Exported file: {res}");
+await ExportHTML.SaveFiles(folderExport);
 
