@@ -15,7 +15,7 @@ public class ExportHTML
     }
     private static async Task SaveEmb(EmbeddedResourceresources res, string path)
     {
-        var stream = EmbeddedResources.GetStream(res);
+        using var stream = EmbeddedResources.GetStream(res);
         string fileName = res.ToString().Replace("_", ".");
         using var fileStream = File.Create(Path.Combine(path, fileName));
         await stream.CopyToAsync(fileStream);

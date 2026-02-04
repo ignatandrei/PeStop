@@ -27,7 +27,7 @@ var option = {
       @foreach(var item in Model.voluntari)
       {
     <text>
-        ['@item.year', @string.Join(", ", item.Values.Select(it => it.Value))],
+        ['@item.year', @string.Join(", ", Model.colNames.Select(name => item.Values.TryGetValue(name, out var v) ? v : 0))],
 
     </text>
       }

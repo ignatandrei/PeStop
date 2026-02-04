@@ -79,6 +79,7 @@ public class VoluntariList : List<VoluntarRead>, IValidatableObject
     }
     public Voluntari[] ValidVoluntaris()
     {
+        this.RemoveEmpty(); 
         var vc = new ValidationContext(this);
         var VoluntarisValid = this.Where(it => !it.Validate(vc).Any()).ToArray();
         return VoluntarisValid.Select(it =>

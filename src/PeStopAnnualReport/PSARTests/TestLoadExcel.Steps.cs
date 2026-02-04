@@ -1,5 +1,6 @@
 ﻿using LightBDD.Framework;
 using LightBDD.TUnit;
+using PSARModels;
 using PSARReadData;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -54,6 +55,19 @@ partial class TestLoadExcel : FeatureFixture
         }
 
         await Assert.That(valid).HasCount(nr); 
+    }
+    async Task And_Data_Obtained_Contains_Voluntari(int Voluntari)
+    {
+        var res = result.Value as DataObtained;
+        await Assert.That(res).IsNotNull();
+        await Assert.That(res.voluntari?.Count).IsEqualTo(Voluntari);
+    }
+
+    async Task And_Data_Obtained_Contains_Packages(int Packages)
+    {
+        var res = result.Value as DataObtained;
+        await Assert.That(res).IsNotNull();
+        await Assert.That(res.packages?.ValidPackages()?.Length).IsEqualTo(Packages);
     }
     async Task When_Read_The_Excel(string excel)
     {

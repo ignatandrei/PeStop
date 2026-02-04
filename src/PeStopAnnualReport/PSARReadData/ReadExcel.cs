@@ -13,11 +13,20 @@ public record DataObtained(PackagesList? packages, VoluntariList? voluntari) : I
 {
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        if (packages == null) yield break;
-
-        foreach (var item in packages.Validate(validationContext))
+        if (packages != null)
         {
-            yield return item;
+
+            foreach (var item in packages.Validate(validationContext))
+            {
+                yield return item;
+            }
+        }
+        if(voluntari != null)
+        {
+            foreach (var item in voluntari.Validate(validationContext))
+            {
+                yield return item;
+            }
         }
     }
 };
