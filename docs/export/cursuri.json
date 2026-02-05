@@ -1,0 +1,37 @@
+{
+  "Cursuri": [
+    {
+      "year": 2024,
+      "tematica": "corp_consimtamant",
+      "Values": {
+        "nr_participanti": 195,
+        "durata_minute": 630
+      }
+    },
+    {
+      "year": 2024,
+      "tematica": "educatie_menstruala",
+      "Values": {
+        "nr_participanti": 150,
+        "durata_minute": 540
+      }
+    },
+    {
+      "year": 2025,
+      "tematica": "corp_consimtamant",
+      "Values": {
+        "nr_participanti": 360,
+        "durata_minute": 2880
+      }
+    },
+    {
+      "year": 2025,
+      "tematica": "educatie_menstruala",
+      "Values": {
+        "nr_participanti": 632,
+        "durata_minute": 1890
+      }
+    }
+  ],
+  "Length": 4
+}

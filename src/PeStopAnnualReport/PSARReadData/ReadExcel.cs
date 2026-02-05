@@ -9,7 +9,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 namespace PSARReadData;
 
-public record DataObtained(PackagesList? packages, VoluntariList? voluntari) : IValidatableObject
+public record DataObtained(PackagesList? packages, VoluntariList? voluntari, CursuriList? cursuri) : IValidatableObject
 {
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
@@ -28,6 +28,13 @@ public record DataObtained(PackagesList? packages, VoluntariList? voluntari) : I
                 yield return item;
             }
         }
+        if(cursuri != null)
+        {
+            foreach (var item in cursuri.Validate(validationContext))
+            {
+                yield return item;
+            }
+        }
     }
 };
 public class ReadExcel
@@ -35,6 +42,7 @@ public class ReadExcel
     static string[] sheets = ["pachete", "cursuri", "voluntari"];
     static string[] colsPachete = ["an", "luna", "nr_pac_bucuresti", "nr_pac_tulcea", "nr_pac_vaslui"];
     static string[] colsVoluntari = ["an",  "voluntari_bucuresti", "voluntari_tulcea", "voluntari_vaslui"];
+    static string[] colsCursuri = ["data", "nr_participanti", "durata_minute", "tematica"];
     public async Task<ResultExcel> ReadExcelData(string excel)
     {
         if (!File.Exists(excel))
@@ -57,9 +65,41 @@ public class ReadExcel
         {
             return voluntari.AsT1;
         }
-        return new DataObtained(packages,voluntari.AsT0);
+        var resultCursuri = await ReadCursuri(excel, sheets[1]);
+        if (!resultCursuri.IsT0)
+        {
+            return resultCursuri.AsT1;
+        }
+        return new DataObtained(packages,voluntari.AsT0,resultCursuri.AsT0);
     }
 
+    public async Task<ResultCursuri> ReadCursuri(string excel, string nameSheet)
+    {
+        var columns = MiniExcel.GetColumns(excel, sheetName: nameSheet, useHeaderRow: true);
+        var missing = colsCursuri.Where(it => !columns.Contains(it)).ToArray();
+        if (missing.Length > 0)
+        {
+            return new CursuriError(new NotFoundHeader(missing));
+        }
+        var pachete = MiniExcel.Query(path: excel, useHeaderRow: true, sheetName: nameSheet).Cast<IDictionary<string, object>>();
+        CursuriList allItems = new();
+        foreach (var (number, row) in pachete.Index())
+        {
+            IDictionary<string, object> x = row as IDictionary<string, object>;
+            ArgumentNullException.ThrowIfNull(x);
+            CursRead item = new(number + 2);//first is header     
+            item.Year = x[colsCursuri[0]]?.ToString() ?? "";
+            for (int i = 1; i < colsCursuri.Length-1; i++)
+            {
+                string col = colsCursuri[i];
+                item.Values.Add(col, x[col]?.ToString() ?? "");
+            }
+            item.Tematica = x[colsCursuri[colsCursuri.Length - 1]]?.ToString() ?? "";
+            allItems.Add(item);
+        }
+        return allItems;
+
+    }
     public async Task<ResultVoluntari> ReadVoluntari(string excel, string nameSheet)
     {
         var columns = MiniExcel.GetColumns(excel, sheetName: nameSheet, useHeaderRow: true);
@@ -75,7 +115,7 @@ public class ReadExcel
             IDictionary<string, object> x = row as IDictionary<string, object>;
             ArgumentNullException.ThrowIfNull(x);
             VoluntarRead item = new(number + 2);//first is header     
-            item.Year = x[colsPachete[0]]?.ToString() ?? "";
+            item.Year = x[colsVoluntari[0]]?.ToString() ?? "";
             for (int i = 1; i < colsVoluntari.Length; i++)
             {
                 string col = colsVoluntari[i];
@@ -140,7 +180,8 @@ public partial class ResultExcel : OneOfBase<
     MissingExcel,
     ExcelMissingSheet,
     ResultPackages,
-    VoluntariError>
+    VoluntariError,
+    CursuriError>
 {
 
 }
@@ -168,3 +209,22 @@ public partial class ResultVoluntari : OneOfBase<
 
 }
 
+
+[GenerateOneOf]
+public partial class CursuriError : OneOfBase<
+    ExcelMissingSheet,
+    NotFoundHeader
+    >
+{
+}
+
+
+
+[GenerateOneOf]
+public partial class ResultCursuri: OneOfBase<
+    CursuriList,
+    CursuriError
+    >
+{
+
+}
