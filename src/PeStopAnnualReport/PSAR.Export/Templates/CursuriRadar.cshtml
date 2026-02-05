@@ -1,0 +1,65 @@
+@using PSAR.Export
+@using System.Globalization
+@using System.Linq
+
+@inherits RazorBlade.PlainTextTemplate<DisplayDataCursuri>
+@{
+    //  var months =CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+    var arrayTematics = Model.cursuri.Cursuri.Select(it => it.tematica).Distinct().ToArray();
+    var yearArray = Model.cursuri.Cursuri.Select(it => it.year).Distinct().ToArray();
+    var legend = string.Join(",", yearArray.Select(it => $"'{it}'").ToArray());
+    var valuesPerYear = Model.cursuri.CursuriPerYearAndTematics();
+}
+
+//this is the script to display for radar tematics
+function DisplayCursuriRadar(idDiv)
+{
+    var myChart = echarts.init(document.getElementById(idDiv));
+
+    var option = {
+  title: {
+    text: 'Cursuri Radar Chart'
+  },
+  legend: {
+    data: [@legend]
+  },
+  radar: {
+    // shape: 'circle',
+    indicator: [
+
+@foreach (var tematics in arrayTematics)
+{
+    <text>
+        { name: '@(tematics+"_minute")'},
+        { name: '@(tematics + "_numar")'},
+    </text>
+}
+
+    ]
+  },
+  series: [
+    {
+      name: 'Tematics + Year',
+      type: 'radar',
+      data: [
+
+@foreach (var year in yearArray)
+{
+    var values = valuesPerYear[year];
+    var data = string.Join(",", values.Select(it => it.Value).ToArray());
+<text>
+        {
+        value: [@data],
+        name: 'Allocated Budget'
+        },
+    </text>
+}
+
+      ]
+    }
+  ]
+};
+
+
+      myChart.setOption(option);
+}

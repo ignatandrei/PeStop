@@ -23,3 +23,7 @@ res = await exportVol.ExportAllDataVoluntari(obtain.voluntari, folderExport);
 Console.WriteLine($"Exported file: {res}");
 await ExportHTML.SaveFiles(folderExport);
 
+var exportCurs = new ExportCursuri();
+res = await exportCurs.ExportAllDatacursuri(obtain.cursuri, folderExport);
+Console.WriteLine($"Exported file: {res}");
+await ExportHTML.SaveFiles(folderExport);

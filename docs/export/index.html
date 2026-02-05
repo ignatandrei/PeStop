@@ -7,10 +7,13 @@
     <script src="echarts.min.js"></script>
     <script src="packages_last_year.js"></script>
     <script src="voluntari_dataset_series_layout_by.js"></script>
-    
+    <script src="cursuriRadar.js"></script>
+
 </head>
 <body>
     <h1>Pe stop data graphics</h1>
+    <div id="cursuri_radar" style="width: 600px;height:400px;"></div>
+
     <div id="packages_last_year_stack_line" style="width: 600px;height:400px;"></div>
     <div id="voluntari_dataset_series_layout_by" style="width: 600px;height:400px;"></div>
 
@@ -19,6 +22,7 @@
     <script type="text/javascript">
         DisplayPackagesStackLine('packages_last_year_stack_line');
         DisplayVoluntari('voluntari_dataset_series_layout_by');
+        DisplayCursuriRadar('cursuri_radar');
     </script>
 </body>
 </html>
